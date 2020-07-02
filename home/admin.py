@@ -1,5 +1,36 @@
 from django.contrib import admin
-from .models import Category, SubCategory, Icon, CareerMail
+from .models import Category, SubCategory, Icon, CareerMail, Person
+
+
+
+# mylifebusy 
+class PersonModelAdmin(admin.ModelAdmin):
+    
+    fields = [
+        'id',
+        'full_name',
+        'position',
+        'office',
+        'age',
+        'start_date',
+        'salary',
+    ]
+
+    readonly_fields = ['id',]
+    list_display = (
+                    'id',
+                    'full_name',
+                    'position',
+                    'office',
+                    'age',
+                    'start_date',
+                    'salary',
+                    )
+
+    class Meta:
+        model = Person
+
+
 # Register your models here.
 
 class role_inline(admin.TabularInline):
@@ -40,10 +71,11 @@ class SubCategoryModelAdmin(admin.ModelAdmin):
         model = SubCategory
 
 
-admin.site.register(Category,CategoryModelAdmin)
+admin.site.register(Category, CategoryModelAdmin)
 admin.site.register(SubCategory)
 admin.site.register(Icon)
 admin.site.register(CareerMail)
+admin.site.register(Person, PersonModelAdmin)
 
 
 

@@ -2,6 +2,32 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import FileExtensionValidator
 
+# mylifebusy.com DB
+
+class Person(models.Model):
+    full_name = models.CharField(max_length = 50)
+    position = models.CharField(max_length = 50)
+    office = models.CharField(max_length = 50)
+    age = models.IntegerField()
+    start_date = models.DateTimeField()
+    salary = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
+
+
+    def __str__(self):
+        return self.full_name
+    
+    class Meta:
+        verbose_name = "person"
+        verbose_name_plural = "persons"
+
+
+
+
+
+
+
+
+
 # Create your models here.
 
 class Category(models.Model):

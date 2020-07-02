@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView,View
 import random
-from home.models import Category,SubCategory
+from home.models import Category,SubCategory, Person
 from . forms import ContactForm, CareerMailForm
 from django.views.generic.edit import FormView
 from django.http import HttpResponseRedirect, HttpResponse
@@ -20,6 +20,20 @@ class Home(TemplateView):
 	
 class Table(TemplateView):
 	template_name = 'home/table.html'
+
+
+	def get(self, request, *args, **kwargs):
+		qs = Person.objects.all().values('full_name','position','office','age','start_date', 'salary')\
+		.filter().order_by('id')
+		context = {
+			'qs': 	qs,
+		}
+		return render(request, self.template_name, context)	
+
+
+
+
+
 
 class Sugar(View):
 	template_name = 'home/sugar.html'
