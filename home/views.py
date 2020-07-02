@@ -18,7 +18,8 @@ class Home(TemplateView):
 	template_name = 'home/home.html'
 	
 	
-	
+class Table(TemplateView):
+	template_name = 'home/table.html'
 
 class Sugar(View):
 	template_name = 'home/sugar.html'

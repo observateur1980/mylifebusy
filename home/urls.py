@@ -7,6 +7,9 @@ urlpatterns = [
     
     
     path('', views.Home.as_view(), name='home'),
+    path('table', views.Table.as_view(), name='table'),
+
+
     path('comingsoon', views.ComingSoon.as_view(), name='comingsoon'),
     path('service', views.Service.as_view(), name='service'),
     path('contact', views.Contact.as_view(), name='contact'),
