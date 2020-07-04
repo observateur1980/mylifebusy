@@ -22,8 +22,8 @@ class Migration(migrations.Migration):
                 ('salary', models.DecimalField(decimal_places=2, default=0.0, max_digits=6)),
             ],
             options={
-                'verbose_name': 'person',
-                'verbose_name_plural': 'persons',
+                'verbose_name': 'contact',
+                'verbose_name_plural': 'contacts',
             },
         ),
     ]

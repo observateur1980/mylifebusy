@@ -14,7 +14,7 @@ def user_login(request, *args, **kwargs):
 	if form.is_valid():
 		user_obj = form.cleaned_data.get('user_obj')
 		login(request, user_obj)
-		# return HttpResponseRedirect(reverse('losgatos:mainpage'))
+		return HttpResponseRedirect(reverse('home:home'))
 	return render(request, 'account/login.html', {'form' : form})
 
 

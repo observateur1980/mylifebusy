@@ -1,18 +1,16 @@
 from django.contrib import admin
-from .models import Category, SubCategory, Icon, CareerMail, Person
+from .models import Category, SubCategory, Icon, CareerMail, Contact
 
 
 
 # mylifebusy 
-class PersonModelAdmin(admin.ModelAdmin):
+class ContactModelAdmin(admin.ModelAdmin):
     
     fields = [
         'id',
         'full_name',
         'position',
         'office',
-        'age',
-        'start_date',
         'salary',
     ]
 
@@ -22,13 +20,11 @@ class PersonModelAdmin(admin.ModelAdmin):
                     'full_name',
                     'position',
                     'office',
-                    'age',
-                    'start_date',
                     'salary',
                     )
 
     class Meta:
-        model = Person
+        model = Contact
 
 
 # Register your models here.
@@ -75,7 +71,7 @@ admin.site.register(Category, CategoryModelAdmin)
 admin.site.register(SubCategory)
 admin.site.register(Icon)
 admin.site.register(CareerMail)
-admin.site.register(Person, PersonModelAdmin)
+admin.site.register(Contact, ContactModelAdmin)
 
 
 

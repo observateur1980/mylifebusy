@@ -9,6 +9,8 @@
 __pycache__/
 # db.sqlite3
 mylifebusy/notes.py
+mylifebusy/temporary.html
+
 
 mylifebusy/settings/local.py
 templates/home/mytest.html

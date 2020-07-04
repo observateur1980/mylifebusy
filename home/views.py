@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView,View
 import random
-from home.models import Category,SubCategory, Person
-from . forms import ContactForm, CareerMailForm
+from home.models import Category,SubCategory, Contact
+from . forms import CareerMailForm, ContactForm
 from django.views.generic.edit import FormView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import send_mail, EmailMessage
@@ -11,28 +12,117 @@ from django.contrib import messages
 from pip._vendor import requests
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django import forms
+
+
 
 # Create your views here.
 
-class Home(TemplateView):
+class Home(LoginRequiredMixin, TemplateView):
 	template_name = 'home/home.html'
+
+
+class Button(LoginRequiredMixin, TemplateView):
+	template_name = 'home/button.html'
+
+class Card(LoginRequiredMixin, TemplateView):
+	template_name = 'home/card.html'
+
+class Color(LoginRequiredMixin, TemplateView):
+	template_name = 'home/color.html'
+
+
+class Border(LoginRequiredMixin, TemplateView):
+	template_name = 'home/border.html'
+
+
+class Animation(LoginRequiredMixin, TemplateView):
+	template_name = 'home/animation.html'
+
+
+class Other(LoginRequiredMixin, TemplateView):
+	template_name = 'home/other.html'	
+
+
+
+class Chart(LoginRequiredMixin, TemplateView):
+	template_name = 'home/chart.html'	
+
+
+
+
+class ContactList(ListView): 
+	template_name = "home/contact.html"
+	model = Contact
 	
+
+class ContactDetail(DetailView): 
+    model = Contact
+
+
+class ContactCreate(CreateView):
+	model = Contact
+	form_class = ContactForm
+	success_url = reverse_lazy('home:contact_list')
+	template_name = "home/contact_create.html"
+	context_object_name = 'contact'
+
+
+class ContactUpdate(UpdateView):
+	model = Contact
+	form_class = ContactForm
+	success_url = reverse_lazy('home:contact_list')
+	template_name = "home/contact_update.html"
+	context_object_name = 'contact'
+	# fields = (	'full_name',
+	# 			'position',
+	# 			'office',
+	# 			'salary')
+
+
+	# widgets = {
+	# 		'full_name' : forms.TextInput(attrs={'id':'bozbash','class':'form-control', 'placeholder':'Enter movie name', 'required':'required'}),
+			
+	# 	}
+	# label = {
+	# 	'full:name':'hechne'
+	# }
 	
-class Table(TemplateView):
-	template_name = 'home/table.html'
+
+	
 
 
-	def get(self, request, *args, **kwargs):
-		qs = Person.objects.all().values('full_name','position','office','age','start_date', 'salary')\
-		.filter().order_by('id')
-		context = {
-			'qs': 	qs,
-		}
-		return render(request, self.template_name, context)	
+class ContactDelete(DeleteView):
+	model = Contact
+	form_class = ContactForm
+	success_url = reverse_lazy('home:contact_list')
+	template_name = "home/contact_delete.html"
+	context_object_name = 'contact'
+    
 
 
 
 
+# class Table(LoginRequiredMixin, ListView):
+# 	model = Person
+# 	template_name = 'home/table.html'
+
+
+	# def get(self, request, *args, **kwargs):
+	# 	qs = Person.objects.all().values('full_name','position','office','age','start_date', 'salary')\
+	# 	.filter().order_by('id')
+	# 	context = {
+	# 		'qs': 	qs,
+	# 	}
+	# 	return render(request, self.template_name, context)	
+
+
+
+			# end of mylifebusy views #
+# -----------------------------------------------#
 
 
 class Sugar(View):

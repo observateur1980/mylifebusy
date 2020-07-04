@@ -12,10 +12,17 @@ from django.db.models import Q
 
 class UserLoginForm(forms.Form):
     query = forms.CharField(label='',
-            widget=forms.TextInput( attrs={'class':'form-control form-control-sm', }))
+            widget=forms.TextInput( 
+                attrs={'class':'form-control form-control-user', 
+                        'placeholder': 'Email Address or Username',
+                        }
+                ))
                                             
 
-    password = forms.CharField(label='', widget=forms.PasswordInput(attrs={'class':'form-control form-control-sm',  }))
+    password = forms.CharField(label='', 
+                widget=forms.PasswordInput(
+                     attrs={'class':'form-control form-control-user', 
+                            'placeholder': 'Password', }))
                                                            
 
     def clean(self,*args, **kwargs):
@@ -31,17 +38,32 @@ class UserLoginForm(forms.Form):
 
 
             ).distinct()
+        # DONT REMOVE IT
+        # if not user_qs_final.exists() and user_qs_final.count() != 1:
+        #     raise forms.ValidationError('Invalid credantials - user not exsist')
+
+
+        # user_obj = user_qs_final.first()
+        # if not user_obj.check_password(password):
+        #         raise forms.ValidationError('Invalid credantials - password invalid')  
+
+        # if not user_obj.is_active:
+        #     raise forms.ValidationError('Inactive user')  
+
+
+        
 
         if not user_qs_final.exists() and user_qs_final.count() != 1:
-            raise forms.ValidationError('Invalid credantials - user not exsist')
+            raise forms.ValidationError('Invalid credantials.')
 
 
         user_obj = user_qs_final.first()
         if not user_obj.check_password(password):
-                raise forms.ValidationError('Invalid credantials - password invalid')  
+                raise forms.ValidationError('Invalid credantials.')  
 
         if not user_obj.is_active:
-            raise forms.ValidationError('Inactive user')  
+            raise forms.ValidationError('Invalid credantials.')  
+
 
 
 

@@ -4,12 +4,10 @@ from django.core.validators import FileExtensionValidator
 
 # mylifebusy.com DB
 
-class Person(models.Model):
+class Contact(models.Model):
     full_name = models.CharField(max_length = 50)
     position = models.CharField(max_length = 50)
     office = models.CharField(max_length = 50)
-    age = models.IntegerField()
-    start_date = models.DateTimeField()
     salary = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
 
 
@@ -17,8 +15,8 @@ class Person(models.Model):
         return self.full_name
     
     class Meta:
-        verbose_name = "person"
-        verbose_name_plural = "persons"
+        verbose_name = "contact"
+        verbose_name_plural = "contacts"
 
 
 

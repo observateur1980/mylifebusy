@@ -1,12 +1,21 @@
 from django import forms
-from .models import CareerMail
+from .models import CareerMail, Contact
 
-class ContactForm(forms.Form):
-    name = forms.CharField( max_length=120, widget=forms.TextInput(attrs={'id':'contact-name','name' :'contact-name', 'required':'required'}))
-    email = forms.EmailField(max_length=120, widget=forms.EmailInput(attrs={'id':'contact-email','name':'contact-email',  'class':'m-required m-email','required':'required'}))
-    phone = forms.CharField( max_length=12, required=False, widget=forms.TextInput(attrs={'id':'contact-phone','name' : 'contact-phone'}))
-    subject = forms.CharField(max_length=120, required=False, widget=forms.TextInput(attrs={'id':'contact-subject', 'name':'contact-subject'}))
-    message = forms.CharField( max_length=2000, widget=forms.Textarea(attrs={'id':'contact-message', 'name':'contact-message', 'required':'required'}))
+class ContactForm(forms.ModelForm):
+
+    class Meta: 
+        model = Contact
+        fields = '__all__'
+        widgets = {
+           'full_name' : forms.TextInput(attrs={'class':'form-control',  'required':'required',}),
+            'position' : forms.TextInput(attrs={'class':'form-control',  'required':'required',}),
+            'office' : forms.TextInput(attrs={'class':'form-control',  'required':'required',}),
+            'salary' : forms.TextInput(attrs={'class':'form-control',  'required':'required',}),
+           }
+        # label = {
+		# 'full_name':'Full name'
+	    # }
+    
 
 
 class CareerMailForm(forms.ModelForm):
